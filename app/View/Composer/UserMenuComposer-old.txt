@@ -1,0 +1,88 @@
+<?php
+
+namespace App\View\Composer;
+
+use Illuminate\View\View;
+use Modules\Appearance\App\Models\AppearanceMenu;
+use Modules\Information\App\Models\Information;
+use Modules\News\App\Models\News;
+
+class UserMenuComposer
+{
+    public function compose(View $view)
+    {
+        $defaultMenuUser = collect(getDefaultUserMenuList());
+        $appearanceMenus = AppearanceMenu::with('appearance_page')->get();
+        $groupedByType = collect($appearanceMenus)->groupBy('type');
+
+        $headerMenu = $this->buildTree($groupedByType->get('header', collect()), $defaultMenuUser, null);
+        $footerMenu = $this->buildTree($groupedByType->get('footer', collect()), $defaultMenuUser, null);
+
+        $view->with('headerMenu', $headerMenu)
+            ->with('footerMenu', $footerMenu);
+    }
+
+    protected function buildTree($elements, $defaultMenuUser, $parent_id = null)
+    {
+        // $branch = [];
+        // foreach ($elements as $element) {
+        //     $elementParentId = (is_null($element['parent_id']) || $element['parent_id'] == null) ? null : $element['parent_id'];
+
+        //     if ($elementParentId == $parent_id) {
+        //         $children = $this->buildTree($elements, $element['id']);
+        //         $element['children'] = $children;
+        //         if ($element['page_origin'] == 'in') {
+        //             if ($element['appearance_page_id'] != null) {
+        //                 $element['url'] = url($element['appearance_page']['slug']);
+        //             } else {
+        //                 $element['url'] = collect(getDefaultUserMenuList())->where('id', $element['default_page_id'])->first()->route;
+        //             }
+        //         }
+        //         $branch[] = $element;
+        //     }
+        // }
+        // return $branch;
+
+        $branch = [];
+
+        $filteredElements = $elements->filter(function ($element) use ($parent_id) {
+            return $element->parent_id == $parent_id;
+        });
+
+        foreach ($filteredElements as $element) {
+            $otherElements = $elements->reject(function ($item) use ($element) {
+                return $item->id == $element->id;
+            });
+
+            $children = $this->buildTree($otherElements, $defaultMenuUser, $element->id);
+
+            if ($children) {
+                $element->children = $children;
+            } else {
+                $element->children = [];
+            }
+
+
+            if ($element->page_origin == 'in') {
+                if ($element->appearance_page_id != null) {
+                    $element->url = route('user.appearance.page.index', $element->appearance_page->slug);
+                } else {
+                    $element->url = $defaultMenuUser->where('id', $element->default_page_id)->first()->route;
+                }
+            } else {
+                $element->url = $element->url;
+            }
+            // if ($element->page_origin == 'in') {
+            //     if ($element->appearance_page != null) {
+            //         $element->url = url($element->appearance_page->slug);
+            //     } else {
+            //         $element->url = collect(getDefaultUserMenuList())->where('id', $element->default_page_id)->first()->route;
+            //     }
+            // }
+
+            $branch[] = $element;
+        }
+
+        return $branch;
+    }
+}

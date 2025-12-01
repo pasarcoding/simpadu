@@ -1,0 +1,11 @@
+{
+    "name": "SynergyProgram",
+    "alias": "synergyprogram",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\SynergyProgram\\App\\Providers\\SynergyProgramServiceProvider"
+    ],
+    "files": []
+}

@@ -1,0 +1,141 @@
+<?php
+
+namespace App\Imports;
+
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Validators\Failure;
+use Modules\Resident\App\Models\Resident;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+
+class ResidentImport implements ToModel, WithHeadingRow, WithValidation, WithStartRow, SkipsOnFailure
+{
+    private $failures;
+
+    public function __construct()
+    {
+        HeadingRowFormatter::default('none');
+        $this->failures = new Collection();
+    }
+
+    public function startRow(): int
+    {
+        return 2;
+    }
+
+    public function headingRow(): int
+    {
+        return 1;
+    }
+
+    public function model(array $row)
+    {
+        $nik = trim($row['nik'] ?? '');
+
+        // if (empty($nik)) continue;
+
+        if (empty($nik)) {
+            return null;
+        }
+
+        $tanggalLahir = null;
+        if (isset($row['tanggal_lahir']) && is_numeric($row['tanggal_lahir'])) {
+            try {
+                $tanggalLahir = Date::excelToDateTimeObject($row['tanggal_lahir'])->format('Y-m-d');
+            } catch (\Exception $e) {
+            }
+        }
+
+        $tanggalPindah = null;
+        if (isset($row['tanggal_pindahkeluar']) && is_numeric($row['tanggal_pindahkeluar'])) {
+            try {
+                $tanggalPindah = Date::excelToDateTimeObject($row['tanggal_pindahkeluar'])->format('Y-m-d');
+            } catch (\Exception $e) {
+            }
+        }
+
+        return new Resident([
+            'national_id' => $nik,
+            'family_card_number' => trim($row['nomor_kk']),
+            'full_name' => $row['nama_lengkap'],
+            'gender' => array_flip(getGenderList())[$row['jenis_kelamin']],
+            'birth_place' => $row['tempat_lahir'],
+            'birth_date' => $tanggalLahir,
+            'religion' => array_flip(getReligionList())[$row['agama']],
+            'job' => array_flip(getJobList())[$row['pekerjaan']],
+            'last_education' => array_flip(getEducationList())[$row['pendidikan_terakhir']],
+            'marital_status' => array_flip(getMaritalStatusList())[$row['status_pernikahan']],
+            'family_relationship' => array_flip(getFamilyRelationshipList())[$row['hubungan_keluarga']],
+            'address' => $row['alamat'],
+            'rt' => trim($row['rt']),
+            'rw' => trim($row['rw']),
+            'hamlet_village' => $row['dusunkelurahan'],
+            'death_status' => array_flip(getDeathStatusList())[$row['status_kematian']],
+            'citizenship' => array_flip(getCitizenshipList())[$row['kewarganegaraan']],
+            'transfer_date' => $tanggalPindah,
+        ]);
+    }
+
+    public function rules(): array
+    {
+        $genderList = array_values(getGenderList());
+        $religionList = array_values(getReligionList());
+        $jobList = array_values(getJobList());
+        $educationList = array_values(getEducationList());
+        $maritalStatusList = array_values(getMaritalStatusList());
+        $familyRelationshipList = array_values(getFamilyRelationshipList());
+        $deathStatusList = array_values(getDeathStatusList());
+        $citizenshipList = array_values(getCitizenshipList());
+
+        return [
+            'nik' => [
+                'nullable',
+                'string',
+                'size:16',
+                Rule::unique(Resident::class, 'national_id'),
+            ],
+            'nomor_kk' => 'nullable|string|size:16',
+            'nama_lengkap' => 'nullable|string',
+            'tempat_lahir' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'rt' => 'nullable|string',
+            'rw' => 'nullable|string',
+            'jenis_kelamin' => ['nullable', Rule::in($genderList)],
+            'agama' => ['nullable', Rule::in($religionList)],
+            'pekerjaan' => ['nullable', Rule::in($jobList)],
+            'pendidikan_terakhir' => ['nullable', Rule::in($educationList)],
+            'status_pernikahan' => ['nullable', Rule::in($maritalStatusList)],
+            'hubungan_keluarga' => ['nullable', Rule::in($familyRelationshipList)],
+            'status_kematian' => ['nullable', Rule::in($deathStatusList)],
+            'kewarganegaraan' => ['nullable', Rule::in($citizenshipList)],
+            'tanggal_lahir' => 'nullable|numeric',
+            'tanggal_pindahkeluar' => 'nullable|numeric',
+            'dusunkelurahan' => 'nullable|string',
+        ];
+    }
+
+    public function onFailure(Failure ...$failures)
+    {
+        foreach ($failures as $failure) {
+            $this->failures->push($failure);
+
+            // Log::warning('IMPORT FAILURE COLLECTED:', [
+            //     'row' => $failure->row(),
+            //     'attribute' => $failure->attribute(),
+            //     'errors' => $failure->errors(),
+            // ]);
+        }
+    }
+
+    public function failures(): Collection
+    {
+        return $this->failures;
+    }
+}

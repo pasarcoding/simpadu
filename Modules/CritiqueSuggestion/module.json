@@ -1,0 +1,11 @@
+{
+    "name": "CritiqueSuggestion",
+    "alias": "critiquesuggestion",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CritiqueSuggestion\\App\\Providers\\CritiqueSuggestionServiceProvider"
+    ],
+    "files": []
+}

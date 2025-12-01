@@ -1,0 +1,11 @@
+{
+    "name": "Information",
+    "alias": "information",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Information\\App\\Providers\\InformationServiceProvider"
+    ],
+    "files": []
+}

@@ -1,0 +1,11 @@
+{
+    "name": "VillageOfficial",
+    "alias": "villageofficial",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\VillageOfficial\\App\\Providers\\VillageOfficialServiceProvider"
+    ],
+    "files": []
+}

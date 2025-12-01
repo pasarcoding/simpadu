@@ -1,0 +1,11 @@
+{
+    "name": "Statistic",
+    "alias": "statistic",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Statistic\\App\\Providers\\StatisticServiceProvider"
+    ],
+    "files": []
+}

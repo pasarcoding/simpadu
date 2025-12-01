@@ -1,0 +1,550 @@
+/* :root {
+    --color-primary-app: #15aa3d;
+    --color-secondary-app: #ec8544;
+} */
+
+* {
+    font-size: 14px;
+}
+
+/* .bg-app {
+    background-color: var(--color-primary-app);
+}
+
+.text-app {
+    color: var(--color-primary-app);
+}
+
+.bg-app-secondary {
+    background-color: var(--color-secondary-app);
+}
+
+.text-app-secondary {
+    color: var(--color-secondary-app);
+}
+
+.bg-app-gradient {
+    background-image: linear-gradient(160deg, #000000 0%, #ffffff 100%);
+} */
+
+.modal {
+    z-index: 10600;
+}
+
+.modal-backdrop {
+    z-index: 10599;
+}
+
+.text-truncate-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* .truncate-2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      } */
+
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .dropdown-toggle,
+.navbar .nav-link.disabled {
+    color: white !important;
+    font-weight: 600;
+}
+
+
+.navbar-nav .dropdown-item {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link.active {
+    background-color: transparent !important;
+    color: var(--color-secondary-app) !important;
+}
+
+.navbar-nav .dropdown-menu {
+    border-bottom-left-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom: 3px solid var(--color-secondary-app);
+}
+
+.navbar-nav .dropdown-item {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.navbar-nav .dropdown-item.active,
+.navbar-nav .dropdown-item:active,
+.navbar-nav .dropdown-item:focus,
+.navbar-nav .dropdown-item:hover {
+    background-color: transparent !important;
+    color: var(--color-secondary-app) !important;
+}
+
+.navbar-search-form {
+    display: flex;
+    flex-grow: 1;
+    margin-left: 1rem;
+}
+
+.hover-scale-effect {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.hover-scale-effect:hover {
+    transform: scale(0.9);
+}
+
+.btn-app-secondary {
+    transition: transform 0.3s ease-in-out;
+    background-color: var(--color-secondary-app);
+}
+
+.btn-app-secondary:hover,
+.btn-app-secondary:focus,
+.btn-app-secondary:active {
+    transform: scale(0.9);
+    background-color: var(--color-secondary-app);
+}
+
+.btn-app-secondary:active:focus {
+    background-color: var(--color-secondary-app);
+}
+
+.bg-parallax {
+    position: relative;
+    background-attachment: fixed;
+    /* background-image: url("https://wpndeso.rrdigital.id/wp-content/uploads/2023/08/3125217837.webp"); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-parallax-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    background-image: linear-gradient(180deg, #ffffff00 0%, #000000 40%);
+    opacity: 0.5;
+    transition: 0.3s;
+    z-index: 1;
+}
+
+.greeting-search-form {
+    display: none;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+}
+
+.card-greeting-menu {
+    text-decoration: none;
+}
+
+.card-greeting-menu img {
+    transition: transform 0.3s ease-in-out;
+    width: 20px;
+    height: 20px;
+}
+
+.card-greeting-menu:hover img {
+    transform: scale(0.9);
+}
+
+.btn-nav-slick {
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s;
+    display: none;
+}
+
+.btn-nav-slick .btn-nav-slick-prev,
+.btn-nav-slick .btn-nav-slick-next {
+    pointer-events: auto;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+}
+
+.banner .banner-item {
+    height: 15rem;
+}
+
+.banner .read-information {
+    text-decoration: none;
+}
+
+.banner .read-information i,
+.banner .read-information span {
+    transition: color 0.2s ease-in-out;
+}
+
+.banner .read-information:hover i,
+.banner .read-information:hover span {
+    color: var(--color-secondary-app);
+}
+
+.banner-wrapper .btn-nav-slick {
+    width: calc(100% + 10px) !important;
+    left: -5px;
+}
+
+.banner-wrapper:hover .btn-nav-slick {
+    opacity: 1;
+    visibility: visible;
+}
+
+.pray-schedule-header {
+    /* height: 9.5rem; */
+    height: 4rem;
+    border-radius: 0.5rem 0.5rem 0px 0px;
+}
+
+.pray-schedule-header-text {
+    justify-content: center;
+}
+
+.pray-schedule-body {
+    border-left: 2px solid var(--color-primary-app);
+    border-right: 2px solid var(--color-primary-app);
+    border-bottom: 2px solid var(--color-primary-app);
+    border-radius: 0px 0px 0.5rem 0.5rem;
+}
+
+.pray-schedule-body .card .d-flex {
+    flex-direction: column;
+    margin-bottom: 0px;
+}
+
+.sign-image {
+    display: flex;
+    justify-content: end;
+}
+
+.village-structure .slick-slide {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.village-structure .slick-list {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.village-structure-wrapper .btn-nav-slick {
+    width: calc(100% + 15px) !important;
+    left: -7.5px;
+}
+
+.village-structure-wrapper:hover .btn-nav-slick {
+    opacity: 1;
+    visibility: visible;
+}
+
+.village-structure-name {
+    font-size: 1rem;
+}
+
+.news .slick-slide {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.news .slick-list {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.news-wrapper .btn-nav-slick {
+    width: calc(100% + 20px) !important;
+    left: -10px;
+}
+
+.news-wrapper:hover .btn-nav-slick {
+    opacity: 1;
+    visibility: visible;
+}
+
+.news-content-new {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.news-item {
+    height: 24rem;
+}
+
+.news-item-content {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.btn-news-new {
+    width: 100%;
+}
+
+.integration-goverment .slick-dots {
+    bottom: -4rem;
+}
+
+.integration-goverment .slick-dots li {
+    margin: 0 -3px;
+}
+
+.integration-goverment .slick-dots li button:before {
+    color: var(--color-primary-app) !important;
+    opacity: 1 !important;
+}
+
+.integration-goverment .slick-dots li.slick-active button:before {
+    color: var(--color-secondary-app) !important;
+    opacity: 1 !important;
+}
+
+.integration-goverment .slick-dots li button:before {
+    color: var(--color-primary-app) !important;
+    opacity: 1 !important;
+}
+
+.footer-othermenu-item {
+    text-decoration: none !important;
+}
+
+.footer-othermenu-item i,
+.footer-othermenu-item span {
+    transition: color 0.2s ease-in-out;
+}
+
+.footer-othermenu-item:hover i {
+    color: var(--color-secondary-app);
+}
+
+.footer-othermenu-item:hover span {
+    color: var(--color-primary-app);
+}
+
+/* BottomSheet */
+.bottom-sheet-dialog {
+    display: flex;
+    align-items: flex-end;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+}
+
+.bottom-sheet-content {
+    border-radius: 0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.show .bottom-sheet-dialog .bottom-sheet-content {
+    transform: translateY(0);
+}
+
+.bottom-sheet-content .navbar .nav-link,
+.bottom-sheet-content .navbar .dropdown-toggle,
+.bottom-sheet-content .navbar .nav-link.disabled {
+    color: black !important;
+    font-weight: 600;
+}
+
+.information .information-item {
+    height: 15rem;
+}
+
+.information .read-information {
+    text-decoration: none;
+}
+
+.information .read-information i,
+.information .read-information span {
+    transition: color 0.2s ease-in-out;
+}
+
+.information .read-information:hover i,
+.information .read-information:hover span {
+    color: var(--color-secondary-app);
+}
+
+/* .modal-backdrop {
+        z-index: 1050;
+      } */
+
+.contact-maps {
+    width: 100%;
+    height: 50vh;
+    border: none;
+}
+
+@media screen and (min-width: 768px) {
+    .navbar-search-form {
+        display: none;
+    }
+
+    .greeting-search-form {
+        display: block;
+        width: 100%;
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    .card-greeting-menu img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .btn-nav-slick {
+        display: flex;
+    }
+
+    .banner .banner-item {
+        height: 20rem;
+    }
+
+    .pray-schedule-body .card .d-flex {
+        flex-direction: row;
+        margin-bottom: 0.5rem;
+    }
+
+    .village-structure-name {
+        font-size: 1.1rem;
+    }
+
+    .news-content-new {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+    }
+
+    .news-item {
+        height: 27rem;
+    }
+
+    .news-item-content {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .btn-news-new {
+        width: auto;
+    }
+
+    .information .information-item {
+        height: 20rem;
+    }
+
+    .contact-maps {
+        width: 100%;
+        height: 60vh;
+    }
+
+}
+
+@media screen and (min-width: 1024px) {
+    .navbar-search-form {
+        display: none;
+    }
+
+    .greeting-search-form {
+        display: block;
+        width: 75% !important;
+        padding-left: 7rem;
+        padding-right: 7rem;
+    }
+
+    .card-greeting-menu img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .btn-nav-slick {
+        display: flex;
+    }
+
+    .banner .banner-item {
+        height: 20rem;
+    }
+
+    .pray-schedule-header {
+        height: 9.5rem;
+        border-radius: 0.5rem 0px 0px 0.5rem;
+    }
+
+    .pray-schedule-header-text {
+        justify-content: start;
+    }
+
+    .pray-schedule-body {
+        height: 9.5rem;
+        border-top: 2px solid var(--color-primary-app);
+        border-right: 2px solid var(--color-primary-app);
+        border-bottom: 2px solid var(--color-primary-app);
+        border-radius: 0px 0.5rem 0.5rem 0px;
+    }
+
+    .pray-schedule-body .card .d-flex {
+        flex-direction: row;
+        margin-bottom: 0.5rem;
+    }
+
+    .sign-image {
+        justify-content: start;
+    }
+
+    .village-structure-name {
+        font-size: 1.25rem;
+    }
+
+    .news-content-new {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+    }
+
+    .news-item {
+        height: 27rem;
+    }
+
+    .news-item-content {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .information .information-item {
+        height: 20rem;
+    }
+
+    .contact-maps {
+        width: 100%;
+        height: 77vh;
+    }
+}

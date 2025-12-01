@@ -1,0 +1,103 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Kritik & Saran')
+
+@section('breadcrumb')
+    <li class="breadcrumb-item" aria-current="page">Kritik & Saran</li>
+@endsection
+
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Gagal!</strong> {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Berhasil!</strong> {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <table class="table table-striped table-bordered datatable">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>#</th>
+                                <th>Content</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Konfirmasi Hapus Data</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus data kritik & saran ini? Aksi ini tidak dapat dibatalkan.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <form method="POST" action="">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Hapus Data</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('footer')
+    <script>
+        $(document).ready(function() {
+            $('.datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                scrollX: true,
+                ajax: "{{ route('admin.critique-suggestion.index') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'content',
+                        name: 'content'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+            });
+        });
+
+        $('#deleteModal').on('show.bs.modal', function(event) {
+            var buttonTrigger = $(event.relatedTarget);
+            var deleteUrl = buttonTrigger.data('delete-url');
+
+            $(this).find('form').attr('action', deleteUrl);
+        });
+    </script>
+@endsection

@@ -1,0 +1,73 @@
+.legend-scroll-wrapper {
+    width: 70% !important;
+    max-height: 100px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 10px; */
+}
+
+.legend-scroll-wrapper::-webkit-scrollbar {
+    height: 3px;
+}
+
+.legend-scroll-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.legend-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.legend-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+.legend-list-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    white-space: nowrap;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+    gap: 8px;
+}
+
+.legend-list-container.center-if-small {
+    justify-content: center;
+}
+
+.legend-list-item {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease-in-out;
+    margin: 0 !important;
+}
+
+.legend-list-item.hidden {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+.legend-color-box {
+    width: 15px;
+    height: 15px;
+    margin-right: 4px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.legend-text {
+    margin: 0;
+    font-size: 0.875rem;
+    color: black !important;
+}

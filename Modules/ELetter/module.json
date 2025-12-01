@@ -1,0 +1,11 @@
+{
+    "name": "ELetter",
+    "alias": "eletter",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ELetter\\App\\Providers\\ELetterServiceProvider"
+    ],
+    "files": []
+}
